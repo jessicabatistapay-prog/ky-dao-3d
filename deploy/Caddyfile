@@ -1,0 +1,5 @@
+# Caddy tự xin chứng chỉ HTTPS và chuyển tiếp WebSocket.
+{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy app:3001
+}

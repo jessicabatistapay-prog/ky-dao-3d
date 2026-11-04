@@ -1,0 +1,10 @@
+{
+  "name": "@kydao/engine",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": { ".": "./src/index.ts", "./ai": "./src/ai/index.ts", "./protocol": "./src/protocol.ts" },
+  "scripts": { "typecheck": "tsc --noEmit" }
+}

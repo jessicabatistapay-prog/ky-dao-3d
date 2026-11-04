@@ -1,0 +1,33 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DB_PATH: /data/kydao.sqlite
+      STATIC_DIR: /app/apps/web/dist
+      TRUST_PROXY: "1"
+    volumes:
+      - kydao-data:/data
+    expose:
+      - "3001"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?Cần đặt DOMAIN trong .env}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  kydao-data:
+  caddy-data:
+  caddy-config:
